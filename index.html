@@ -2,167 +2,130 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ALOYS WILLIAM - Flag Quiz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALOYS WILLIAM - Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #22c55e;
-      --secondary: #fbbf24;
-      --background: #0f172a;
-      --neon-blue: #38bdf8;
-    }
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-      color: white;
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh; overflow: hidden;
-    }
-    .dev-banner {
-      position: fixed; top: 0; width: 100%;
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 10px 0; text-align: center; z-index: 1000;
-      backdrop-filter: blur(5px);
-    }
-    .dev-name { font-size: 16px; font-weight: 800; text-shadow: 0 0 10px var(--neon-blue); }
-    .dev-title { font-size: 10px; text-transform: uppercase; opacity: 0.6; display: block; }
-    .app {
-      margin-top: 60px; width: 90%; max-width: 400px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px); border-radius: 24px;
-      padding: 25px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-      text-align: center; border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .game-status {
-      display: flex; justify-content: space-around; margin-bottom: 20px;
-      background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px;
-    }
-    .flag-container {
-      width: 100%; height: 140px; display: flex;
-      justify-content: center; align-items: center; margin-bottom: 20px;
-    }
-    img {
-      max-width: 90%; max-height: 100%; border-radius: 10px;
-      border: 3px solid white; display: block;
-    }
-    input {
-      width: calc(100% - 24px); padding: 12px; margin: 8px 0;
-      border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255, 255, 255, 0.05); color: white; outline: none;
-    }
-    button {
-      width: 100%; padding: 14px; margin-top: 15px; border: none;
-      border-radius: 10px; background: linear-gradient(135deg, var(--primary), #16a34a);
-      color: white; font-weight: 700; cursor: pointer;
-    }
-    #feedback { min-height: 20px; margin-top: 15px; font-weight: 600; }
+    :root { --primary: #22c55e; --blue: #38bdf8; }
+    body { margin: 0; font-family: 'Poppins', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+    .dev-banner { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.95); padding: 12px 0; text-align: center; border-bottom: 2px solid var(--blue); z-index: 10; }
+    .dev-name { font-size: 18px; font-weight: 800; text-shadow: 0 0 10px var(--blue); letter-spacing: 1px; }
+    .app { width: 90%; max-width: 400px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 24px; padding: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+    .game-status { display: flex; justify-content: space-between; margin-bottom: 15px; background: rgba(0,0,0,0.3); padding: 10px 15px; border-radius: 12px; font-weight: 600; }
+    .flag-container { width: 100%; height: 160px; display: flex; justify-content: center; align-items: center; margin: 15px 0; }
+    img { max-width: 90%; max-height: 100%; border: 4px solid white; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    input { width: calc(100% - 30px); padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; outline: none; text-align: center; }
+    button { width: 100%; padding: 15px; margin-top: 15px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--primary), #16a34a); color: white; font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.2s; }
+    button:active { transform: scale(0.98); }
+    #feedback { margin-top: 15px; font-weight: 700; min-height: 24px; }
   </style>
 </head>
 <body>
+
   <div class="dev-banner">
     <div class="dev-name">ALOYS WILLIAM</div>
-    <div class="dev-title">Développeur Principal</div>
+    <div style="font-size: 10px; opacity: 0.7;">DÉVELOPPEUR PRINCIPAL</div>
   </div>
 
   <div class="app">
-    <h1>🌍 Flag Quiz</h1>
+    <h2 style="margin-top: 0;">🌍 Flag Quiz</h2>
+    
     <div class="game-status">
-      <div style="color:var(--secondary)">⏱ <span id="time">10</span>s</div>
+      <div style="color:#fbbf24">⏱ <span id="time">10</span>s</div>
       <div>Score: <span id="score">0</span></div>
     </div>
+
     <div class="flag-container">
-      <img id="flag" src="https://flagcdn.com/w320/cm.png" alt="chargement..." />
+      <img id="flag" src="" alt="Drapeau" />
     </div>
-    <input type="text" id="country" placeholder="Pays (ex: Cameroun)" />
-    <input type="text" id="capital" placeholder="Capitale (ex: Yaoundé)" />
-    <button onclick="checkAnswer()">Valider</button>
+
+    <input type="text" id="country" placeholder="Nom du pays" autocomplete="off" />
+    <input type="text" id="capital" placeholder="Sa capitale" autocomplete="off" />
+
+    <button onclick="checkAnswer()">VALIDER</button>
+
     <div id="feedback"></div>
   </div>
 
 <script>
-let countries = [];
+// Base de données intégrée (Tu peux en ajouter autant que tu veux ici)
+const data = [
+    { n: "cameroun", c: "yaounde", img: "https://flagcdn.com/w320/cm.png" },
+    { n: "france", c: "paris", img: "https://flagcdn.com/w320/fr.png" },
+    { n: "cote d'ivoire", c: "yamoussoukro", img: "https://flagcdn.com/w320/ci.png" },
+    { n: "senegal", c: "dakar", img: "https://flagcdn.com/w320/sn.png" },
+    { n: "belgique", c: "bruxelles", img: "https://flagcdn.com/w320/be.png" },
+    { n: "maroc", c: "rabat", img: "https://flagcdn.com/w320/ma.png" },
+    { n: "bresil", c: "brasilia", img: "https://flagcdn.com/w320/br.png" },
+    { n: "canada", c: "ottawa", img: "https://flagcdn.com/w320/ca.png" },
+    { n: "espagne", c: "madrid", img: "https://flagcdn.com/w320/es.png" },
+    { n: "allemagne", c: "berlin", img: "https://flagcdn.com/w320/de.png" },
+    { n: "italie", c: "rome", img: "https://flagcdn.com/w320/it.png" },
+    { n: "suisse", c: "berne", img: "https://flagcdn.com/w320/ch.png" },
+    { n: "gabon", c: "libreville", img: "https://flagcdn.com/w320/ga.png" },
+    { n: "togo", c: "lome", img: "https://flagcdn.com/w320/tg.png" },
+    { n: "benin", c: "porto-novo", img: "https://flagcdn.com/w320/bj.png" }
+];
+
 let current = {};
 let score = 0;
 let time = 10;
-let interval;
+let timer;
 
-async function initGame() {
-  document.getElementById("feedback").innerText = "Chargement...";
-  try {
-    // Utilisation d'une source de données plus stable
-    const res = await fetch("https://restcountries.com/v3.1/all?fields=translations,capital,flags");
-    countries = await res.json();
-    document.getElementById("feedback").innerText = "";
-    loadNewCountry();
-  } catch (e) {
-    document.getElementById("feedback").innerText = "Erreur réseau. Réessaie.";
-  }
+// Fonction pour enlever les accents (plus facile pour le joueur)
+function clean(str) {
+    return str.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function startTimer() {
-  clearInterval(interval);
-  time = 10;
-  document.getElementById("time").innerText = time;
-  interval = setInterval(() => {
-    time--;
+function next() {
+    clearInterval(timer);
+    time = 10;
     document.getElementById("time").innerText = time;
-    if (time <= 0) {
-      clearInterval(interval);
-      document.getElementById("feedback").innerText = "⏰ Temps écoulé !";
-      score = 0;
-      document.getElementById("score").innerText = score;
-      setTimeout(loadNewCountry, 1500);
-    }
-  }, 1000);
-}
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("country").value = "";
+    document.getElementById("capital").value = "";
 
-function loadNewCountry() {
-  const countryInput = document.getElementById("country");
-  const capitalInput = document.getElementById("capital");
-  countryInput.value = ""; 
-  capitalInput.value = "";
-  
-  let random;
-  do {
-    random = countries[Math.floor(Math.random() * countries.length)];
-  } while (!random.flags || !random.translations.fra || !random.capital || !random.capital[0]);
+    // Choix au hasard
+    current = data[Math.floor(Math.random() * data.length)];
+    document.getElementById("flag").src = current.img;
 
-  current = {
-    name: random.translations.fra.common.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-    capital: random.capital[0].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-    flag: random.flags.png
-  };
-
-  document.getElementById("flag").src = current.flag;
-  document.getElementById("feedback").innerText = "";
-  startTimer();
+    timer = setInterval(() => {
+        time--;
+        document.getElementById("time").innerText = time;
+        if(time <= 0) {
+            clearInterval(timer);
+            document.getElementById("feedback").innerText = "⏰ TEMPS ÉCOULÉ !";
+            document.getElementById("feedback").style.color = "#fbbf24";
+            score = 0;
+            document.getElementById("score").innerText = score;
+            setTimeout(next, 2000);
+        }
+    }, 1000);
 }
 
 function checkAnswer() {
-  let uCountry = document.getElementById("country").value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  let uCapital = document.getElementById("capital").value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let uC = clean(document.getElementById("country").value);
+    let uCap = clean(document.getElementById("capital").value);
 
-  if (uCountry === current.name && uCapital === current.capital) {
-    clearInterval(interval);
-    score++;
-    document.getElementById("score").innerText = score;
-    document.getElementById("feedback").innerHTML = "✔ Bravo !";
-    document.getElementById("feedback").style.color = "#22c55e";
-    setTimeout(loadNewCountry, 1000);
-  } else {
-    clearInterval(interval);
-    document.getElementById("feedback").innerHTML = "❌ Faux ! C'était " + current.name;
-    document.getElementById("feedback").style.color = "#ef4444";
-    score = 0;
-    document.getElementById("score").innerText = score;
-    setTimeout(loadNewCountry, 2000);
-  }
+    if(uC === clean(current.n) && uCap === clean(current.c)) {
+        clearInterval(timer);
+        score++;
+        document.getElementById("score").innerText = score;
+        document.getElementById("feedback").innerText = "✔ BRAVO ! (+1)";
+        document.getElementById("feedback").style.color = "#22c55e";
+        setTimeout(next, 1000);
+    } else {
+        clearInterval(timer);
+        document.getElementById("feedback").innerText = "❌ FAUX ! C'était " + current.n.toUpperCase();
+        document.getElementById("feedback").style.color = "#ef4444";
+        score = 0;
+        document.getElementById("score").innerText = score;
+        setTimeout(next, 2500);
+    }
 }
 
-window.onload = initGame;
+// Lancer le jeu
+window.onload = next;
 </script>
 </body>
 </html>
