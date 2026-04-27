@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aloys William - Flag Quiz</title>  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 95%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .dev {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 5px 0;
+    }
+
+    .timer {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #fbbf24;
+    }
+
+    img {
+      width: 180px;
+      height: auto;
+      border-radius: 12px;
+      margin: 15px 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 6px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    button {
+      width: 95%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 12px;
+      background: #22c55e;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #16a34a;
+      transform: scale(1.02);
+    }
+
+    .score {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    #feedback {
+      margin-top: 10px;
+      font-weight: 500;
+    }
+  </style></head>
+<body><div class="app">  <div class="dev">Développé par Aloys William 💻</div>  <h1>🌍 Flag Quiz</h1>
+  <div class="timer">⏱ <span id="time">10</span>s</div>  <img id="flag" src="" alt="drapeau" />  <input type="text" id="country" placeholder="Nom du pays" />
+  <input type="text" id="capital" placeholder="Capitale" /><button onclick="checkAnswer()">Valider</button>
+
+  <div id="feedback"></div>
+  <div class="score">Score : <span id="score">0</span></div></div><script>
+let countries = [];
+let current = {};
+let score = 0;
+let time = 10;
+let interval;
+
+fetch("https://restcountries.com/v3.1/all")
+  .then(res => res.json())
+  .then(data => {
+    countries = data;
+    loadNewCountry();
+  });
+
+function startTimer() {
+  clearInterval(interval);
+  time = 10;
+  document.getElementById("time").innerText = time;
+
+  interval = setInterval(() => {
+    time--;
+    document.getElementById("time").innerText = time;
+
+    if (time <= 0) {
+      clearInterval(interval);
+      document.getElementById("feedback").innerText = "⏰ Temps écoulé ! Score final : " + score;
+      score = 0;
+      document.getElementById("score").innerText = score;
+      loadNewCountry();
+    }
+  }, 1000);
+}
+
+function loadNewCountry() {
+  let random = countries[Math.floor(Math.random() * countries.length)];
+
+  current = {
+    name: random.name.common.toLowerCase(),
+    capital: random.capital ? random.capital[0].toLowerCase() : "",
+    flag: random.flags.png
+  };
+
+  document.getElementById("flag").src = current.flag;
+  document.getElementById("country").value = "";
+  document.getElementById("capital").value = "";
+  document.getElementById("feedback").innerText = "";
+
+  startTimer();
+}
+
+function checkAnswer() {
+  let country = document.getElementById("country").value.toLowerCase();
+  let capital = document.getElementById("capital").value.toLowerCase();
+
+  if (country === current.name && capital === current.capital) {
+    score++;
+    document.getElementById("score").innerText = score;
+    document.getElementById("feedback").innerText = "✔ Correct !";
+    loadNewCountry();
+  } else {
+    document.getElementById("feedback").innerText = "❌ Faux ! Score final : " + score;
+    score = 0;
+    document.getElementById("score").innerText = score;
+    loadNewCountry();
+  }
+}
+</script></body>
+</html>
