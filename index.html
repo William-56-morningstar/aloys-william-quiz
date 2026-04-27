@@ -7,191 +7,78 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #22c55e; /* Vert */
-      --secondary: #fbbf24; /* Jaune/Or */
-      --background: #0f172a; /* Fond très sombre */
-      --overlay: rgba(255, 255, 255, 0.03);
+      --primary: #22c55e;
+      --secondary: #fbbf24;
+      --background: #0f172a;
       --neon-blue: #38bdf8;
     }
-
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: 'Poppins', sans-serif;
       background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; overflow: hidden;
     }
-
-    /* Le bandeau du dévelopeur principale */
     .dev-banner {
-      position: fixed;
-      top: 0;
-      width: 100%;
+      position: fixed; top: 0; width: 100%;
       background: rgba(15, 23, 42, 0.9);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 10px 0;
-      text-align: center;
-      z-index: 1000;
+      padding: 10px 0; text-align: center; z-index: 1000;
       backdrop-filter: blur(5px);
     }
-
-    .dev-name {
-      font-size: 16px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 1px;
-      margin: 0;
-      text-shadow: 0 0 10px var(--neon-blue);
-    }
-
-    .dev-title {
-      font-size: 10px;
-      text-transform: uppercase;
-      opacity: 0.6;
-      display: block;
-    }
-
+    .dev-name { font-size: 16px; font-weight: 800; text-shadow: 0 0 10px var(--neon-blue); }
+    .dev-title { font-size: 10px; text-transform: uppercase; opacity: 0.6; display: block; }
     .app {
-      margin-top: 60px; /* Espace pour le bandeau */
-      width: 90%;
-      max-width: 400px;
-      background: var(--overlay);
-      backdrop-filter: blur(15px);
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin: 0 0 15px 0;
-    }
-
-    .game-status {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-bottom: 20px;
-      font-size: 16px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 12px;
-      padding: 10px;
-    }
-
-    .timer {
-      color: var(--secondary);
-      font-weight: 600;
-    }
-
-    .score {
-      font-weight: 600;
-    }
-
-    .flag-container {
-      width: 100%;
-      height: 140px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0 20px 0;
-    }
-
-    img {
-      max-width: 90%;
-      max-height: 100%;
-      border-radius: 10px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-      border: 3px solid white;
-      object-fit: cover;
-      display: none; /* Cache par défaut */
-    }
-
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid var(--neon-blue);
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
-    }
-
-    input {
-      width: calc(100% - 24px);
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255, 255, 255, 0.02);
-      outline: none;
-      font-size: 14px;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    input:focus {
-      border-color: var(--primary);
+      margin-top: 60px; width: 90%; max-width: 400px;
       background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px); border-radius: 24px;
+      padding: 25px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      text-align: center; border: 1px solid rgba(255, 255, 255, 0.05);
     }
-
+    .game-status {
+      display: flex; justify-content: space-around; margin-bottom: 20px;
+      background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px;
+    }
+    .flag-container {
+      width: 100%; height: 140px; display: flex;
+      justify-content: center; align-items: center; margin-bottom: 20px;
+    }
+    img {
+      max-width: 90%; max-height: 100%; border-radius: 10px;
+      border: 3px solid white; display: block;
+    }
+    input {
+      width: calc(100% - 24px); padding: 12px; margin: 8px 0;
+      border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.05); color: white; outline: none;
+    }
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--primary) 0%, #16a34a 100%);
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+      width: 100%; padding: 14px; margin-top: 15px; border: none;
+      border-radius: 10px; background: linear-gradient(135deg, var(--primary), #16a34a);
+      color: white; font-weight: 700; cursor: pointer;
     }
-
-    #feedback {
-      min-height: 20px;
-      margin-top: 15px;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    #feedback { min-height: 20px; margin-top: 15px; font-weight: 600; }
   </style>
 </head>
 <body>
   <div class="dev-banner">
     <div class="dev-name">ALOYS WILLIAM</div>
-    <div class="dev-title">Développeur Principal / Original Creator</div>
+    <div class="dev-title">Développeur Principal</div>
   </div>
 
   <div class="app">
     <h1>🌍 Flag Quiz</h1>
-
     <div class="game-status">
-      <div class="timer">⏱ <span id="time">10</span>s</div>
-      <div class="score">Score: <span id="score">0</span></div>
+      <div style="color:var(--secondary)">⏱ <span id="time">10</span>s</div>
+      <div>Score: <span id="score">0</span></div>
     </div>
-
     <div class="flag-container">
-      <div id="loader" class="loader"></div>
-      <img id="flag" src="" alt="drapeau" />
+      <img id="flag" src="https://flagcdn.com/w320/cm.png" alt="chargement..." />
     </div>
-
-    <input type="text" id="country" placeholder="Nom du pays (en français)" />
-    <input type="text" id="capital" placeholder="Capitale" />
-
+    <input type="text" id="country" placeholder="Pays (ex: Cameroun)" />
+    <input type="text" id="capital" placeholder="Capitale (ex: Yaoundé)" />
     <button onclick="checkAnswer()">Valider</button>
-
     <div id="feedback"></div>
   </div>
 
@@ -201,144 +88,80 @@ let current = {};
 let score = 0;
 let time = 10;
 let interval;
-const LOADER_LIMIT = 5000; // 5s max pour charger un drapeau
 
-// Initialisation : charge les données français
-function initGame() {
-  const feedbackEl = document.getElementById("feedback");
-  feedbackEl.innerText = "Chargement des pays...";
-  
-  // Requête API pour avoir le nom français, la capitale et le drapeau
-  fetch("https://restcountries.com/v3.1/all?fields=translations,capital,flags")
-    .then(res => {
-      if (!res.ok) throw new Error("Erreur de connexion");
-      return res.json();
-    })
-    .then(data => {
-      countries = data;
-      feedbackEl.innerText = "";
-      loadNewCountry();
-    })
-    .catch(err => {
-      console.error(err);
-      feedbackEl.innerText = "Erreur de chargement. Vérifie ton internet.";
-      feedbackEl.style.color = "#ef4444";
-    });
+async function initGame() {
+  document.getElementById("feedback").innerText = "Chargement...";
+  try {
+    // Utilisation d'une source de données plus stable
+    const res = await fetch("https://restcountries.com/v3.1/all?fields=translations,capital,flags");
+    countries = await res.json();
+    document.getElementById("feedback").innerText = "";
+    loadNewCountry();
+  } catch (e) {
+    document.getElementById("feedback").innerText = "Erreur réseau. Réessaie.";
+  }
 }
 
 function startTimer() {
   clearInterval(interval);
   time = 10;
   document.getElementById("time").innerText = time;
-
   interval = setInterval(() => {
     time--;
     document.getElementById("time").innerText = time;
-
     if (time <= 0) {
       clearInterval(interval);
       document.getElementById("feedback").innerText = "⏰ Temps écoulé !";
-      document.getElementById("feedback").style.color = var(--secondary);
-      resetScore();
-      loadNewCountry();
+      score = 0;
+      document.getElementById("score").innerText = score;
+      setTimeout(loadNewCountry, 1500);
     }
   }, 1000);
 }
 
-function resetScore() {
-  score = 0;
-  document.getElementById("score").innerText = score;
-}
-
 function loadNewCountry() {
-  clearInterval(interval); // Arrête le timer pendant le chargement
-  const flagImg = document.getElementById("flag");
-  const loader = document.getElementById("loader");
   const countryInput = document.getElementById("country");
   const capitalInput = document.getElementById("capital");
-  
-  // Cache le drapeau précédent et montre le loader
-  flagImg.style.display = "none";
-  loader.style.display = "block";
-
-  // Nettoie les champs
-  countryInput.value = "";
+  countryInput.value = ""; 
   capitalInput.value = "";
   
   let random;
-
-  // Assure qu'on prend un pays avec drapeau, nom français et capitale
   do {
     random = countries[Math.floor(Math.random() * countries.length)];
-  } while (!random.flags || !random.flags.png || !random.translations.fra || !random.capital[0]);
+  } while (!random.flags || !random.translations.fra || !random.capital || !random.capital[0]);
 
   current = {
-    // Stocke le nom commun français en minuscules
-    name: random.translations.fra.common.toLowerCase(),
-    capital: random.capital[0].toLowerCase(),
+    name: random.translations.fra.common.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    capital: random.capital[0].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     flag: random.flags.png
   };
 
-  // Met à jour l'image et attend qu'elle soit chargée
-  flagImg.src = current.flag;
-  
-  flagImg.onload = function() {
-    loader.style.display = "none";
-    flagImg.style.display = "block";
-    startTimer(); // Démarre le timer uniquement quand l'image est visible
-  };
-
-  flagImg.onerror = function() {
-    console.error("Erreur de chargement du drapeau, nouvel essai...");
-    loadNewCountry(); // Recommence si l'image foire
-  };
+  document.getElementById("flag").src = current.flag;
+  document.getElementById("feedback").innerText = "";
+  startTimer();
 }
 
 function checkAnswer() {
-  const countryInput = document.getElementById("country");
-  const capitalInput = document.getElementById("capital");
-  const feedbackEl = document.getElementById("feedback");
+  let uCountry = document.getElementById("country").value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  let uCapital = document.getElementById("capital").value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  let country = countryInput.value.trim().toLowerCase();
-  let capital = capitalInput.value.trim().toLowerCase();
-
-  // Permet de valider avec la touche 'Entrée'
-  if (!country || !capital) {
-      feedbackEl.innerText = "Remplis les deux champs !";
-      return;
-  }
-
-  // Vérification
-  if (country === current.name && capital === current.capital) {
-    clearInterval(interval); // Stoppe le timer pour le feedback
+  if (uCountry === current.name && uCapital === current.capital) {
+    clearInterval(interval);
     score++;
     document.getElementById("score").innerText = score;
-    feedbackEl.innerText = "✔ Bravo ! (+1)";
-    feedbackEl.style.color = var(--primary);
-    
-    // Attends un peu avant le suivant pour laisser voir le feedback
-    setTimeout(loadNewCountry, 800);
+    document.getElementById("feedback").innerHTML = "✔ Bravo !";
+    document.getElementById("feedback").style.color = "#22c55e";
+    setTimeout(loadNewCountry, 1000);
   } else {
     clearInterval(interval);
-    feedbackEl.innerText = `❌ Faux ! C'était : ${current.name} (${current.capital})`;
-    feedbackEl.style.color = "#ef4444";
-    
-    resetScore();
-    // Laisse voir la bonne réponse plus longtemps
-    setTimeout(loadNewCountry, 1800);
+    document.getElementById("feedback").innerHTML = "❌ Faux ! C'était " + current.name;
+    document.getElementById("feedback").style.color = "#ef4444";
+    score = 0;
+    document.getElementById("score").innerText = score;
+    setTimeout(loadNewCountry, 2000);
   }
 }
 
-// Support pour valider avec la touche entrée sur les inputs
-document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            checkAnswer();
-        }
-    });
-});
-
-// Lance le jeu au chargement de la page
 window.onload = initGame;
 </script>
 </body>
